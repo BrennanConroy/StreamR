@@ -5,7 +5,7 @@ var ascii = (function() {
 		// Original code by Jacob Seidelin (http://www.nihilogic.dk/labs/jsascii/)
 		// Heavily modified by Andrei Gheorghe (http://github.com/idevelop)
 
-		var characters = (" .,:;i1tfLCG08@").split("");
+		var characters = ("..,:;i1tfLCG08@").split("");
 
 		var context = canvas.getContext("2d");
 		var canvasWidth = canvas.width;
@@ -41,7 +41,18 @@ var ascii = (function() {
 
 				var character = characters[(characters.length - 1) - Math.round(brightness * (characters.length - 1))];
 
-				var colorString = contrastedColor.red.toString(16) + contrastedColor.green.toString(16) + contrastedColor.blue.toString(16);
+				var r = color.red.toString(16);
+				var g = color.green.toString(16);
+				var b = color.blue.toString(16);
+			  
+				if (r.length == 1)
+				  r = "0" + r;
+				if (g.length == 1)
+				  g = "0" + g;
+				if (b.length == 1)
+				  b = "0" + b;
+				var colorString = r + g + b;
+				// TODO make this faster :D
 				character = "<span style='color:#" + colorString + "'>" + character + "</span>";
 
 				asciiCharacters += character;
