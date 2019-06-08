@@ -55,21 +55,23 @@ namespace StreamR
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseRouting(); 
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseSignalR(route =>
+            app.UseEndpoints(endpoints =>
             {
-                route.MapHub<StreamHub>("/stream", o =>
+                // Mapping of endpoints goes here:
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
+                endpoints.MapHub<StreamHub>("/stream", o =>
                 {
                     //o.TransportMaxBufferSize = 1000000;
                     //o.ApplicationMaxBufferSize = 1000000;
                 });
             });
-
-            app.UseMvc();
         }
     }
 }
