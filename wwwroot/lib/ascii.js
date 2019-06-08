@@ -41,10 +41,13 @@ var ascii = (function() {
 
 				var character = characters[(characters.length - 1) - Math.round(brightness * (characters.length - 1))];
 
+				var colorString = contrastedColor.red.toString(16) + contrastedColor.green.toString(16) + contrastedColor.blue.toString(16);
+				character = "<span style='color:#" + colorString + "'>" + character + "</span>";
+
 				asciiCharacters += character;
 			}
 
-			asciiCharacters += "\n";
+			asciiCharacters += "\n"; // This may need to be line break
 		}
 
 		options.callback(asciiCharacters);
